@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Components Order Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .order-summary {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Order Form</h1>
+    <form id="order-form">
+        <div class="form-group">
+            <label for="processor">Processor</label>
+            <select class="form-control" id="processor">
+                <option value="200">Intel i5 - $200</option>
+                <option value="300">Intel i7 - $300</option>
+                <option value="250">AMD Ryzen 5 - $250</option>
+                <option value="350">AMD Ryzen 7 - $350</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="memory">Memory</label>
+            <select class="form-control" id="memory">
+                <option value="50">8GB - $50</option>
+                <option value="100">16GB - $100</option>
+                <option value="200">32GB - $200</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="storage">Storage</label>
+            <select class="form-control" id="storage">
+                <option value="70">256GB SSD - $70</option>
+                <option value="120">512GB SSD - $120</option>
+                <option value="200">1TB SSD - $200</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" rows="3" required></textarea>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="calculateTotal()">Submit Order</button>
+    </form>
+
+    <div id="order-summary" class="order-summary" style="display: none;">
+        <h2>Order Summary</h2>
+        <p id="summary-components"></p>
+        <p id="summary-customer"></p>
+        <p><strong>Total Cost: $<span id="total-cost"></span></strong></p>
+    </div>
+</div>
+
+<!-- Bootstrap and jQuery JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function calculateTotal() {
+        // Get selected components
+        const processorPrice = parseInt(document.getElementById('processor').value);
+        const memoryPrice = parseInt(document.getElementById('memory').value);
+        const storagePrice = parseInt(document.getElementById('storage').value);
+
+        // Calculate total cost
+        const totalCost = processorPrice + memoryPrice + storagePrice;
+
+        // Get customer information
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+
+        // Display order summary
+        document.getElementById('summary-components').innerText =
+            `Processor: $${processorPrice}, Memory: $${memoryPrice}, Storage: $${storagePrice}`;
+        document.getElementById('summary-customer').innerText =
+            `Name: ${name}, Email: ${email}, Address: ${address}`;
+        document.getElementById('total-cost').innerText = totalCost;
+
+        // Show the summary
+        document.getElementById('order-summary').style.display = 'block';
+    }
+</script>
+</body>
+</html>
